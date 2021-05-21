@@ -1,0 +1,6 @@
+rootProject.name = "Router"
+include ':app'
+include ':router'
+include ':AlligatorRouter'
+include ':NavRouter'
+include ':NavRouterConnect'
