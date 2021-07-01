@@ -12,4 +12,8 @@ java {
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    testImplementation 'app.cash.turbine:turbine:0.5.2'
 }

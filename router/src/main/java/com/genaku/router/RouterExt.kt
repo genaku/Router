@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
  *
  * @author Gena Kuchergin
  */
-inline fun <reified T : ScreenResult> Screen.observe(coroutineScope: CoroutineScope, crossinline block: (T) -> Unit) {
+inline fun <reified T : ScreenResult> RouterScreen.observe(coroutineScope: CoroutineScope, crossinline block: (T) -> Unit) {
     coroutineScope.launch {
         resultStateFlow.collect {
             if (it is T) {

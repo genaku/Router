@@ -1,6 +1,7 @@
 package com.genaku.router
 
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.io.Serializable
 
 /**
  * Screen
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
  *
  * @author Gena Kuchergin
  */
-interface Screen {
+interface RouterScreen: Serializable {
 
     /**
      * Parameters for screen

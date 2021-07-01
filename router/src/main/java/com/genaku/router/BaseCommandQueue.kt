@@ -11,6 +11,6 @@ open class BaseCommandQueue<C : RouterCommand> : CommandQueue<C> {
     override val commandFlow: Flow<C> = channel.receiveAsFlow()
 
     override fun send(command: C) {
-        channel.trySend(command)
+        channel.offer(command)
     }
 }

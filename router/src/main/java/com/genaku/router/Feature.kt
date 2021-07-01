@@ -7,7 +7,7 @@ package com.genaku.router
  *
  * @author Gena Kuchergin
  */
-interface Feature: Screen {
+interface Feature: RouterScreen {
 
     /**
      * Is feature available (can be started?)

@@ -1,4 +1,4 @@
-package com.genaku.navrouterbase
+package com.genaku.navrouter
 
 import com.genaku.router.Feature
 
