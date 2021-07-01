@@ -1,40 +1,30 @@
 package com.genaku.router
 
-import kotlinx.coroutines.flow.Flow
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 
-abstract class AbstractRouter<S : Screen, C : RouterCommand>(
-    protected val commandQueue: CommandQueue<C>
-) : Router<S>, CommandFlow<C> {
+abstract class AbstractRouter<S : RouterScreen, C : RouterCommand>(
+    protected val commandQueue: CommandQueue<C>,
+    protected val routerScreens: RouterScreens<S>
+) : Router<S>, CommandFlow<C> by commandQueue, ScreenParameters by routerScreens {
 
-    protected val screens: ConcurrentHashMap<Long, S> = ConcurrentHashMap()
+    abstract fun getStartCommand(screen: S, uuid: UUID): C
 
-    abstract fun getStartCommand(screen: S, uid: Long): C
-
-    abstract fun getFinishCommand(uid: Long): C
-
-    override val commandFlow: Flow<C>
-        get() = commandQueue.commandFlow
+    abstract fun getFinishCommand(uuid: UUID): C
 
     override fun start(screen: S) {
-        val uid = Date().time
-        screens[uid] = screen
+        val uid = routerScreens.addScreen(screen)
         commandQueue.send(getStartCommand(screen, uid))
     }
 
-    override fun finish(uid: Long) {
-        commandQueue.send(getFinishCommand(uid))
-        screens.remove(uid)
+    override fun finish(uuid: UUID) {
+        commandQueue.send(getFinishCommand(uuid))
+        routerScreens.deleteScreen(uuid)
     }
 
-    override fun finishWithResult(uid: Long, result: ScreenResult) {
-        val screen = screens[uid]
-            ?: throw NoSuchElementException("Screen with uid = $uid not found")
+    override fun finishWithResult(uuid: UUID, result: ScreenResult) {
+        val screen = routerScreens.getScreenOrNull(uuid)
+            ?: throw NoSuchElementException("Screen with uid = $uuid not found")
         screen.resultStateFlow.tryEmit(result)
-        finish(uid)
+        finish(uuid)
     }
-
-    override fun getParametersOrNull(uid: Long): ScreenParams? =
-        screens[uid]?.params
 }

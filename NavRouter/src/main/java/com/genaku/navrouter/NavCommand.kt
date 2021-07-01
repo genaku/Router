@@ -1,6 +1,7 @@
-package com.genaku.navrouterbase
+package com.genaku.navrouter
 
 import com.genaku.router.RouterCommand
+import java.util.*
 
 /**
  * Nav command
@@ -20,11 +21,11 @@ object Back : NavCommand()
  * Command for Navigation Component to navigate to new screen with [destinationResId]
  *
  * @property destinationResId - ResId of screen start destination in nav graph
- * @property uid - screen unique ID, will be sent as argument by Navigation Component to navigated screen
+ * @property uuid - screen unique ID, will be sent as argument by Navigation Component to navigated screen
  *
  * @author Gena Kuchergin
  */
-data class Open(val destinationResId: Int, val uid: Long) : NavCommand()
+data class Open(val destinationResId: Int, val uuid: UUID) : NavCommand()
 
 /**
  * Command for Navigation Component to return back from current feature

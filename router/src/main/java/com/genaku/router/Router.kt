@@ -1,5 +1,7 @@
 package com.genaku.router
 
+import java.util.*
+
 /**
  * Router
  *
@@ -7,7 +9,7 @@ package com.genaku.router
  *
  * @author Gena Kuchergin
  */
-interface Router<T : Screen> {
+interface Router<T : RouterScreen> {
 
     /**
      * Start screen will open screen
@@ -17,25 +19,25 @@ interface Router<T : Screen> {
     fun start(screen: T)
 
     /**
-     * Finish screen with [uid]
+     * Finish screen with [uuid]
      *
-     * @param uid - screen unique id
+     * @param uuid - screen unique id
      */
-    fun finish(uid: Long)
+    fun finish(uuid: UUID)
 
     /**
-     * Finish screen with [uid] sending result through router
+     * Finish screen with [uuid] sending result through router
      *
-     * @param uid - screen unique id
+     * @param uuid - screen unique id
      * @param result - screen result
      */
-    fun finishWithResult(uid: Long, result: ScreenResult)
+    fun finishWithResult(uuid: UUID, result: ScreenResult)
 
     /**
-     * Get parameters of screen with [uid]
+     * Get parameters of screen with [uuid]
      *
-     * @param uid - screen unique id
+     * @param uuid - screen unique id
      * @return screen parameters or null if not found
      */
-    fun getParametersOrNull(uid: Long): ScreenParams?
+    fun getParametersOrNull(uuid: UUID): ScreenParams?
 }

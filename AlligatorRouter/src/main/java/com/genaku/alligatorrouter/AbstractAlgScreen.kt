@@ -1,18 +1,11 @@
-package com.genaku.navrouterbase
+package com.genaku.alligatorrouter
 
 import com.genaku.router.EmptyScreenResult
 import com.genaku.router.ScreenParams
 import com.genaku.router.ScreenResult
 import kotlinx.coroutines.flow.MutableStateFlow
 
-/**
- * Abstract nav screen
- *
- * @property destinationResId - ResId of screen start destination in nav graph
- *
- * @author Gena Kuchergin
- */
-abstract class AbstractNavScreen(override val destinationResId: Int): NavScreen {
+abstract class AbstractAlgScreen : AlgScreen {
 
     abstract override val params: ScreenParams
 

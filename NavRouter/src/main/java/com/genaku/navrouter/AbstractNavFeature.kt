@@ -1,4 +1,4 @@
-package com.genaku.navrouterbase
+package com.genaku.navrouter
 
 /**
  * Abstract nav feature
