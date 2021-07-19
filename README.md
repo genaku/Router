@@ -19,3 +19,4 @@ Step 2. Add the dependency
 	        implementation 'com.github.genaku:Router:Tag'
 	}
 
+Sample: see https://github.com/genaku/FeaturesProto
