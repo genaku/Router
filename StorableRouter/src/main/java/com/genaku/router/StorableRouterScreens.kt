@@ -24,7 +24,7 @@ class StorableRouterScreens<S : RouterScreen>(
             getAllScreens()
         )
         log("save ${data.screens}")
-        if (data.screens.isEmpty()) {
+        if (data.screens.isNotEmpty()) {
             outState.putSerializable(key, data)
         }
     }
