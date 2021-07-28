@@ -8,13 +8,16 @@ import com.genaku.navrouter.NavCommand
 import com.genaku.navrouter.NavRouter
 import com.genaku.navrouter.NavScreen
 import com.genaku.navrouter.connectTo
+import kotlinx.coroutines.Job
 
 class MainActivity : AppCompatActivity() {
+
+    private var routerJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        router.connectTo(lifecycleScope, findNavController(R.id.rootNavHostFragment))
+        routerJob = router.connectTo(lifecycleScope, findNavController(R.id.rootNavHostFragment))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -27,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         commandQueue.onSaveInstanceState(outState)
         routerScreens.onSaveInstanceState(outState)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        routerJob?.cancel()
     }
 }
 

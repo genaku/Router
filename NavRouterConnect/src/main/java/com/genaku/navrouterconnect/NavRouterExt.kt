@@ -11,17 +11,23 @@ import com.genaku.router.RouterCommand
 import com.genaku.router.Screen
 import kotlinx.coroutines.flow.collect
 
+/**
+ * Connect router to lifecycle and NavController
+ *
+ * @param lifecycleScope
+ * @param navController
+ *
+ * @return job - this job should be canceled in onPause() method of activity
+ */
 fun <S : Screen, C : RouterCommand> AbstractRouter<S, C>.connectTo(
     lifecycleScope: LifecycleCoroutineScope,
     navController: NavController
-) {
-    lifecycleScope.launchWhenResumed {
-        commandFlow.collect {
-            when (it) {
-                Back -> navController.navigateUp()
-                is Open -> navController.navigate(it.destinationResId, uidToBundle(it.uid))
-                is BackAction -> navController.navigate(it.actionResId)
-            }
+): Job = lifecycleScope.launchWhenResumed {
+    commandFlow.collect {
+        when (it) {
+            Back -> navController.navigateUp()
+            is Open -> navController.navigate(it.destinationResId, uidToBundle(it.uid))
+            is BackAction -> navController.navigate(it.actionResId)
         }
     }
 }
