@@ -2,6 +2,7 @@ package com.genaku.alligatorrouter
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.genaku.router.AbstractRouter
 import com.genaku.router.CommandQueue
 import com.genaku.router.RouterScreens
@@ -20,7 +21,6 @@ open class AlgRouter(
     override fun getStartCommand(screen: AlgScreen, uuid: UUID): AlgCommand = Open(screen, uuid)
 
     override fun getFinishCommand(uuid: UUID): AlgCommand = Back
-
 
     override fun bind(
         activity: AppCompatActivity,
@@ -55,4 +55,10 @@ open class AlgRouter(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         navigator.activityResultHandler.onActivityResult(requestCode, resultCode, data)
     }
+
+    override fun getUUID(activity: AppCompatActivity): UUID =
+        navigator.screenResolver.getScreen<AlgScreen>(activity).uuid!!
+
+    override fun getUUID(fragment: Fragment): UUID =
+        navigator.screenResolver.getScreen<AlgScreen>(fragment).uuid!!
 }

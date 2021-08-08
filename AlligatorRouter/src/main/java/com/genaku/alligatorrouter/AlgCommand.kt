@@ -10,3 +10,5 @@ object Back : AlgCommand()
 data class Open(val screen: AlgScreen, val uuid: UUID) : AlgCommand()
 
 data class ResetTo(val screen: AlgScreen, val uuid: UUID) : AlgCommand()
+
+data class Replace(val screen: AlgScreen, val uuid: UUID) : AlgCommand()

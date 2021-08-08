@@ -2,8 +2,10 @@ package com.genaku.alligatorrouter
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import me.aartikov.alligator.animations.providers.TransitionAnimationProvider
 import me.aartikov.alligator.listeners.ScreenResultListener
+import java.util.*
 
 /**
  * Интерфейс роутера на базе me.aartikov.alligator.Navigator
@@ -49,4 +51,8 @@ interface AlligatorRouter {
      * @param data
      */
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+
+    fun getUUID(activity: AppCompatActivity): UUID
+
+    fun getUUID(fragment: Fragment): UUID
 }
