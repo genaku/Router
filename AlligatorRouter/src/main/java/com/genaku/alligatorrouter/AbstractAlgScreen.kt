@@ -10,6 +10,7 @@ abstract class AbstractAlgScreen(override var uuid: UUID? = null) : AlgScreen {
 
     abstract override val params: ScreenParams
 
+    @Transient
     override val resultStateFlow: MutableStateFlow<ScreenResult> = MutableStateFlow(
         EmptyScreenResult
     )
